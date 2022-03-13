@@ -28,7 +28,7 @@ class DepositCommand implements Command{
         }
 
         manipulator.addAmount(denomination, numberOfBanknotes);
-        String out = String.format(res.getString("success.format"), denomination, manipulator.getCurrencyCode());
+        String out = String.format(res.getString("success.format"), denomination * numberOfBanknotes, manipulator.getCurrencyCode());
         ConsoleHelper.writeMessage(out);
     }
 }

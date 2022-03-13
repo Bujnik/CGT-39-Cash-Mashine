@@ -6,8 +6,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class ConsoleHelper {
+    private static ResourceBundle res = ResourceBundle.getBundle(CashMachine.class.getPackage().getName() + ".resources.common_en");
     private static final BufferedReader bis = new BufferedReader(new InputStreamReader(System.in));
 
     public static void writeMessage(String message) {
@@ -18,21 +20,24 @@ public class ConsoleHelper {
         String s = null;
         try{
             s = bis.readLine();
-            if (s.equalsIgnoreCase("EXIT")) throw new InterruptedOperationException();
+            if (s.equalsIgnoreCase("EXIT")) {
+                ConsoleHelper.writeMessage(res.getString("the.end"));
+                throw new InterruptedOperationException();
+            }
         } catch (IOException ignored) {
         }
         return s;
     }
 
     public static String requestCurrencyCode() throws InterruptedOperationException {
-        writeMessage("Enter currency code: ");
+        writeMessage(res.getString("choose.currency.code"));
         String s = null;
         while (s == null) {
             s = readString();
             //Code has to be 3 characters long
             if (s.length() != 3) {
                 s = null;
-                writeMessage("Invalid code.");
+                writeMessage(res.getString("invalid.data"));
             }
         }
         return s.toUpperCase(Locale.ROOT);
@@ -45,11 +50,12 @@ public class ConsoleHelper {
         int denomination;
         int numberOfBanknotes;
         do{
-            writeMessage("Enter denomination and number of banknotes, separated by space");
+            String out = String.format(res.getString("choose.denomination.and.count.format"), currencyCode);
+            writeMessage(out);
             String[] arr = readString().split(" ");
             //arr needs to have only 2 elements
             if (arr.length != 2) {
-                writeMessage("Invalid input.");
+                writeMessage(res.getString("invalid.data"));
                 continue;
             }
             try {
@@ -59,7 +65,7 @@ public class ConsoleHelper {
                 if (denomination < 0 || numberOfBanknotes < 0) throw new InterruptedOperationException();
             }
             catch (Exception e) {
-                writeMessage("Invalid input.");
+                writeMessage(res.getString("invalid.data"));
                 continue;
             }
             break;
@@ -72,12 +78,16 @@ public class ConsoleHelper {
         Operation operation;
         do{
             try{
-                writeMessage("Enter operation ID: ");
-                writeMessage("1 - INFO, 2 - DEPOSIT, 3 - WITHDRAW, 4 - EXIT");
+                writeMessage(res.getString("choose.operation"));
+                writeMessage("1 - " + res.getString("operation.INFO"));
+                writeMessage("2 - " + res.getString("operation.DEPOSIT"));
+                writeMessage("3 - " + res.getString("operation.WITHDRAW"));
+                writeMessage("4 - " + res.getString("operation.EXIT"));
+
                 number = Integer.parseInt(readString());
                 operation = Operation.getAllowableOperationByOrdinal(number);
             } catch (IllegalArgumentException e) {
-                writeMessage("Invalid input.");
+                writeMessage(res.getString("invalid.data"));
                 continue;
             }
             break;
