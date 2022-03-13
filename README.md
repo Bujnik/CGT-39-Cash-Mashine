@@ -18,4 +18,5 @@ Obviously, everything should be user friendly, so you'll have to arrange things 
 __________________________________________________________
 My takeaways: <br>
 -> Practice with Factory pattern <br>
-->
+-> Practice with Command pattern <br>
+-> Practice with greedy algorithm
