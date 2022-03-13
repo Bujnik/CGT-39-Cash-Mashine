@@ -6,11 +6,12 @@ import main.exception.InterruptedOperationException;
 import java.util.Locale;
 
 public class CashMachine {
+    public static final String RESOURCE_PATH = CashMachine.class.getPackage().getName() + ".resources.";
     public static void main(String[] args) {
         //Following line secures validator problems
         Locale.setDefault(Locale.ENGLISH);
 
-        Operation operation = null;
+        Operation operation;
         boolean loggedIn = false;
         do {
             try {
@@ -23,7 +24,7 @@ public class CashMachine {
                 CommandExecutor.execute(operation);
 
             } catch (InterruptedOperationException e) {
-                ConsoleHelper.writeMessage("Goodbye");
+                ConsoleHelper.printExitMessage();
                 break;
             }
         }while (!operation.equals(Operation.EXIT));

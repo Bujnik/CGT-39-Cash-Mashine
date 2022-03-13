@@ -16,8 +16,10 @@ Obviously, everything should be user friendly, so you'll have to arrange things 
  
 
 __________________________________________________________
-My takeaways: <br>
+Task completed. My takeaways: <br>
 -> Practice with Factory pattern <br>
 -> Practice with Command pattern <br>
 -> Practice with greedy algorithm<br>
--> Working with properties
+-> Working with properties <br>
+I had much fun working with this task, figuring out the dependencies and working with properties.<br>
+The most difficult part wast to write withdrawal logic.

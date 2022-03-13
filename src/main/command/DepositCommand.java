@@ -9,7 +9,7 @@ import main.exception.InterruptedOperationException;
 import java.util.ResourceBundle;
 
 class DepositCommand implements Command{
-    private ResourceBundle res = ResourceBundle.getBundle(CashMachine.class.getPackage().getName() + ".resources.deposit_en");
+    private ResourceBundle res = ResourceBundle.getBundle(CashMachine.RESOURCE_PATH + "deposit_en");
 
     @Override
     public void execute() throws InterruptedOperationException {

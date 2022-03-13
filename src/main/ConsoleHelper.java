@@ -9,7 +9,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class ConsoleHelper {
-    private static ResourceBundle res = ResourceBundle.getBundle(CashMachine.class.getPackage().getName() + ".resources.common_en");
+    private static ResourceBundle res = ResourceBundle.getBundle(CashMachine.RESOURCE_PATH + "common_en");
     private static final BufferedReader bis = new BufferedReader(new InputStreamReader(System.in));
 
     public static void writeMessage(String message) {
@@ -21,7 +21,7 @@ public class ConsoleHelper {
         try{
             s = bis.readLine();
             if (s.equalsIgnoreCase("EXIT")) {
-                ConsoleHelper.writeMessage(res.getString("the.end"));
+                printExitMessage();
                 throw new InterruptedOperationException();
             }
         } catch (IOException ignored) {
@@ -96,4 +96,7 @@ public class ConsoleHelper {
     }
 
 
+    public static void printExitMessage() {
+        ConsoleHelper.writeMessage(res.getString("the.end"));
+    }
 }

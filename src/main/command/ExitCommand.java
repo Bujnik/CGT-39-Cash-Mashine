@@ -7,7 +7,7 @@ import main.exception.InterruptedOperationException;
 import java.util.ResourceBundle;
 
 class ExitCommand implements Command{
-    private ResourceBundle res = ResourceBundle.getBundle(CashMachine.class.getPackage().getName() + ".resources.exit_en");
+    private ResourceBundle res = ResourceBundle.getBundle(CashMachine.RESOURCE_PATH + "exit_en");
 
     @Override
     public void execute() throws InterruptedOperationException {

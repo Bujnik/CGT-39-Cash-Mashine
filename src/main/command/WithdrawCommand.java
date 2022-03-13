@@ -10,8 +10,8 @@ import main.exception.InterruptedOperationException;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-class WithdrawCommand implements Command {
-    private ResourceBundle res = ResourceBundle.getBundle(CashMachine.class.getPackage().getName() + ".resources.withdraw_en");
+class WithdrawCommand implements Command{
+    private ResourceBundle res = ResourceBundle.getBundle(CashMachine.RESOURCE_PATH + "withdraw_en");
 
     @Override
     public void execute() throws InterruptedOperationException {
@@ -30,7 +30,8 @@ class WithdrawCommand implements Command {
                     continue;
                 }
                 withdrawMap = manipulator.withdrawAmount(expectedAmount);
-            } catch (IllegalArgumentException e) {
+            }
+            catch (IllegalArgumentException e){
                 ConsoleHelper.writeMessage(res.getString("specify.not.empty.amount"));
                 continue;
             } catch (InsufficientFundsException e) {
@@ -38,7 +39,7 @@ class WithdrawCommand implements Command {
                 continue;
             }
             break;
-        } while (true);
+        }while (true);
 
 
         //Print results
