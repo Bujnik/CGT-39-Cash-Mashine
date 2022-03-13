@@ -1,10 +1,11 @@
 package main;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class CurrencyManipulator {
     private String currencyCode;
-    private Map<Integer, Integer> denominations;
+    private Map<Integer, Integer> denominations = new HashMap<>();
 
     public CurrencyManipulator(String currencyCode) {
         this.currencyCode = currencyCode;
@@ -12,5 +13,10 @@ public class CurrencyManipulator {
 
     public String getCurrencyCode() {
         return currencyCode;
+    }
+
+    public void addAmount(int denomination, int count){
+        if (denominations.containsKey(denomination)) denominations.put(denomination, denominations.get(denomination) + count);
+        else denominations.put(denomination, count);
     }
 }
