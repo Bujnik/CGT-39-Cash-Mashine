@@ -15,6 +15,7 @@ public class CashMachine {
         int numberOfBanknotes = Integer.parseInt(entry[1]);
 
         manipulator.addAmount(denomination, numberOfBanknotes);
+        int amount = manipulator.getTotalAmount();
 
     }
 }
