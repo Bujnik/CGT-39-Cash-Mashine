@@ -19,4 +19,5 @@ __________________________________________________________
 My takeaways: <br>
 -> Practice with Factory pattern <br>
 -> Practice with Command pattern <br>
--> Practice with greedy algorithm
+-> Practice with greedy algorithm<br>
+-> Working with properties

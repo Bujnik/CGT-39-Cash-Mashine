@@ -16,10 +16,10 @@ public class CashMachine {
             try {
                 //Login must be conducted before any other operation
                 if (!loggedIn) {
-                    operation = Operation.LOGIN;
+                    CommandExecutor.execute(Operation.LOGIN);
                     loggedIn = true;
                 }
-                else operation = ConsoleHelper.requestOperation();
+                operation = ConsoleHelper.requestOperation();
                 CommandExecutor.execute(operation);
 
             } catch (InterruptedOperationException e) {
