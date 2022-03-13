@@ -1,12 +1,15 @@
 package main.command;
 
+import main.CashMachine;
 import main.ConsoleHelper;
 import main.exception.InterruptedOperationException;
 
+import java.util.ResourceBundle;
+
 public class LoginCommand implements Command{
-    //These values were required to be hardcoded
-    long cardNumber = 123456789012L;
-    int pin = 1234;
+
+    private ResourceBundle validCreditCards = ResourceBundle.getBundle(CashMachine.class.getPackage().getName() + ".resources.verifiedCards");
+
     @Override
     public void execute() throws InterruptedOperationException {
         boolean isValidated = false;
@@ -23,7 +26,8 @@ public class LoginCommand implements Command{
                 ConsoleHelper.writeMessage("Invalid input.");
                 continue;
             }
-            if (cardNumberUser != cardNumber || pinUser != pin) {
+            if (!validCreditCards.containsKey(String.valueOf(cardNumberUser))
+                    || !validCreditCards.getString(String.valueOf(cardNumberUser)).equalsIgnoreCase(String.valueOf(pinUser)) ) {
                 ConsoleHelper.writeMessage("Invalid input.");
             }
             else {
