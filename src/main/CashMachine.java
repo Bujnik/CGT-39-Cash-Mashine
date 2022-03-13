@@ -11,10 +11,17 @@ public class CashMachine {
         Locale.setDefault(Locale.ENGLISH);
 
         Operation operation = null;
+        boolean loggedIn = false;
         do {
             try {
-                operation = ConsoleHelper.requestOperation();
+                //Login must be conducted before any other operation
+                if (!loggedIn) {
+                    operation = Operation.LOGIN;
+                    loggedIn = true;
+                }
+                else operation = ConsoleHelper.requestOperation();
                 CommandExecutor.execute(operation);
+
             } catch (InterruptedOperationException e) {
                 ConsoleHelper.writeMessage("Goodbye");
                 break;
