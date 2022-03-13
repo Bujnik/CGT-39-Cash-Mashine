@@ -65,4 +65,22 @@ public class ConsoleHelper {
         } while (true);
         return new String[]{String.valueOf(denomination), String.valueOf(numberOfBanknotes)};
     }
+
+    public static Operation requestOperation(){
+        int number;
+        Operation operation;
+        do{
+            try{
+                writeMessage("Enter operation ID: ");
+                writeMessage("1 - INFO, 2 - DEPOSIT, 3 - WITHDRAW, 4 - EXIT");
+                number = Integer.parseInt(readString());
+                operation = Operation.getAllowableOperationByOrdinal(number);
+            } catch (Exception e) {
+                writeMessage("Invalid input.");
+                continue;
+            }
+            break;
+        }while (true);
+        return operation;
+    }
 }
