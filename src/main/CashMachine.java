@@ -1,5 +1,7 @@
 package main;
 
+import main.command.CommandExecutor;
+
 import java.util.Locale;
 
 public class CashMachine {
@@ -7,15 +9,11 @@ public class CashMachine {
         //Following line secures validator problems
         Locale.setDefault(Locale.ENGLISH);
 
-        String currencyCode = ConsoleHelper.requestCurrencyCode();
-        CurrencyManipulator manipulator = CurrencyManipulatorFactory.getManipulatorByCurrencyCode(currencyCode);
-
-        String[] entry = ConsoleHelper.getTwoValidNumbers(currencyCode);
-        int denomination = Integer.parseInt(entry[0]);
-        int numberOfBanknotes = Integer.parseInt(entry[1]);
-
-        manipulator.addAmount(denomination, numberOfBanknotes);
-        int amount = manipulator.getTotalAmount();
+        Operation operation = null;
+        do {
+            operation = ConsoleHelper.requestOperation();
+            CommandExecutor.execute(operation);
+        }while (!operation.equals(Operation.EXIT));
 
     }
 }

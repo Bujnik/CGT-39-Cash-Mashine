@@ -1,5 +1,6 @@
 package main;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -16,5 +17,9 @@ public class CurrencyManipulatorFactory {
             map.put(currencyCodeUpperCase, new CurrencyManipulator(currencyCodeUpperCase));
         }
         return map.get(currencyCodeUpperCase);
+    }
+
+    public static Collection<CurrencyManipulator> getAllCurrencyManipulators(){
+        return map.values();
     }
 }
