@@ -3,10 +3,11 @@ package main.command;
 import main.ConsoleHelper;
 import main.CurrencyManipulator;
 import main.CurrencyManipulatorFactory;
+import main.exception.InterruptedOperationException;
 
-class DepositCommand implements Command{
+class DepositCommand implements Command {
     @Override
-    public void execute() {
+    public void execute() throws InterruptedOperationException {
         String currencyCode = ConsoleHelper.requestCurrencyCode();
         CurrencyManipulator manipulator = CurrencyManipulatorFactory.getManipulatorByCurrencyCode(currencyCode);
 

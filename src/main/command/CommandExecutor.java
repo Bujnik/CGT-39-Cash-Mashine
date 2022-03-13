@@ -1,6 +1,7 @@
 package main.command;
 
 import main.Operation;
+import main.exception.InterruptedOperationException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +19,7 @@ public class CommandExecutor {
         allKnownCommandsMap.put(Operation.EXIT, new ExitCommand());
     }
 
-    public static final void execute(Operation operation){
+    public static final void execute(Operation operation) throws InterruptedOperationException {
         allKnownCommandsMap.get(operation).execute();
     }
 

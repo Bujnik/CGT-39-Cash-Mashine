@@ -14,16 +14,17 @@ public class ConsoleHelper {
         System.out.println(message);
     }
 
-    public static String readString(){
+    public static String readString() throws InterruptedOperationException {
         String s = null;
         try{
             s = bis.readLine();
+            if (s.equalsIgnoreCase("EXIT")) throw new InterruptedOperationException();
         } catch (IOException ignored) {
         }
         return s;
     }
 
-    public static String requestCurrencyCode(){
+    public static String requestCurrencyCode() throws InterruptedOperationException {
         writeMessage("Enter currency code: ");
         String s = null;
         while (s == null) {
@@ -40,7 +41,7 @@ public class ConsoleHelper {
     /**
      * For some reason requirement is to return String array, instead of Integer
      */
-    public static String[] getTwoValidNumbers(String currencyCode){
+    public static String[] getTwoValidNumbers(String currencyCode) throws InterruptedOperationException {
         int denomination;
         int numberOfBanknotes;
         do{
@@ -66,7 +67,7 @@ public class ConsoleHelper {
         return new String[]{String.valueOf(denomination), String.valueOf(numberOfBanknotes)};
     }
 
-    public static Operation requestOperation(){
+    public static Operation requestOperation() throws InterruptedOperationException{
         int number;
         Operation operation;
         do{
@@ -75,7 +76,7 @@ public class ConsoleHelper {
                 writeMessage("1 - INFO, 2 - DEPOSIT, 3 - WITHDRAW, 4 - EXIT");
                 number = Integer.parseInt(readString());
                 operation = Operation.getAllowableOperationByOrdinal(number);
-            } catch (Exception e) {
+            } catch (IllegalArgumentException e) {
                 writeMessage("Invalid input.");
                 continue;
             }
@@ -83,4 +84,6 @@ public class ConsoleHelper {
         }while (true);
         return operation;
     }
+
+
 }

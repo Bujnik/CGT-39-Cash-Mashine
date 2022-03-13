@@ -1,6 +1,7 @@
 package main;
 
 import main.command.CommandExecutor;
+import main.exception.InterruptedOperationException;
 
 import java.util.Locale;
 
@@ -11,8 +12,13 @@ public class CashMachine {
 
         Operation operation = null;
         do {
-            operation = ConsoleHelper.requestOperation();
-            CommandExecutor.execute(operation);
+            try {
+                operation = ConsoleHelper.requestOperation();
+                CommandExecutor.execute(operation);
+            } catch (InterruptedOperationException e) {
+                ConsoleHelper.writeMessage("Goodbye");
+                break;
+            }
         }while (!operation.equals(Operation.EXIT));
 
     }

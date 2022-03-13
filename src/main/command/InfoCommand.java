@@ -3,12 +3,13 @@ package main.command;
 import main.ConsoleHelper;
 import main.CurrencyManipulator;
 import main.CurrencyManipulatorFactory;
+import main.exception.InterruptedOperationException;
 
 import java.util.Collection;
 
 class InfoCommand implements Command{
     @Override
-    public void execute() {
+    public void execute() throws InterruptedOperationException {
         Collection<CurrencyManipulator> set = CurrencyManipulatorFactory.getAllCurrencyManipulators();
         boolean hasMoney = false;
         for (CurrencyManipulator c : set) {
